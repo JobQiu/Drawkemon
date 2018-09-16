@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Component
 public class RedisHelper {
-    public static final int REDIS_CACHE_EXPIRE_TIME = 3600;
+    public static final int REDIS_CACHE_EXPIRE_TIME = 36000;
 
     private boolean useRedis = true;
 

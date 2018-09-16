@@ -34,27 +34,7 @@ public class FileController {
     RedisHelper redisHelper;
 
 
-    @GetMapping("like")
-    public boolean like(String key, String ipAddr) {
-        String value = redisHelper.get(key);
-        MiniPainting m = new MiniPainting(value);
 
-        m.setLike(m.getLike() + 1);
-
-        redisHelper.save(key, m.toString());
-
-        return true;
-    }
-
-    @GetMapping("dislike")
-    public boolean dislike(String key, String ipAddr) {
-        String value = redisHelper.get(key);
-        MiniPainting m = new MiniPainting(value);
-        m.setDislike(m.getDislike() + 1);
-
-        redisHelper.save(key, m.toString());
-        return false;
-    }
 
 
     @GetMapping("gallery")
@@ -65,10 +45,14 @@ public class FileController {
         List<Painting> list = new ArrayList();
 
         for (String s : temp.keySet()) {
+            Painting p = new Painting(s,temp.get(s));
+            if (p.getImageUrl().startsWith("http://localhost")){
+                continue;
+            }
             list.add(new Painting(s, temp.get(s)));
         }
 
-        list.sort(Comparator.comparingInt(Painting::getLike));
+        list.sort((o1, o2) -> o2.getLike()-o1.getLike());
         return list;
     }
 

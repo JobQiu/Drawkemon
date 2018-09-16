@@ -12,6 +12,7 @@ public class Painting {
 
     private String nickname;
     private String imageUrl;
+    private String key;
 
     private int like;
     private int dislike;
@@ -38,6 +39,7 @@ public class Painting {
      * @throws
      **/
     public Painting(String key, String value) {
+        this.key = key;
         int t1 = key.indexOf('_');
         key = key.substring(t1 + 1);
         t1 = key.indexOf('_');

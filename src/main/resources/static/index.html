@@ -113,6 +113,18 @@ var editors = []
 var request_in_progress = false
 
 function main() {
+
+    $.get("gallery", function(data, status){
+        alert("Data: " + data.size() + "\nStatus: " + status);
+        alert("Data: " + data.length + "\nStatus: " + status);
+        alert("Data: " + data + "\nStatus: " + status);
+
+
+
+        document.getElementById("testres").innerHTML = data;
+    });
+
+
   var create_editor = function(config) {
     var editor = new Editor(config)
     var elem = document.getElementById(config.name)
@@ -1143,6 +1155,9 @@ div.desc {
 </style>
 <!-- Testimonial section
 ================================================== -->
+
+<p id="testres"></p>
+
 <section id="testimonial" class="parallax-section">
   <div class="container">
     <div class="center">
