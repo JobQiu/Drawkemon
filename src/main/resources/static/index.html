@@ -588,12 +588,8 @@ Editor.prototype = {
         var y = 0
         var width = 800 * SCALE - x
         var height = 310 * SCALE - y
-		  alert(width)
-		  alert(height)
         var convert = createContext(width, height, 1)
         convert.drawImage(v.ctx.canvas, x, y, width, height, 0, 0, convert.canvas.width, convert.canvas.height)
-          alert(convert.canvas.width)
-          alert(convert.canvas.height)
 		  var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
         var data = b64_to_bin(data_b64)
         var blob = new Blob([data], {type: "application/octet-stream"})
@@ -618,15 +614,11 @@ Editor.prototype = {
           var y = 0
           var width = 800 * SCALE - x
           var height = 310 * SCALE - y
-		  alert(width)
-		  alert(height)
           var convert = createContext(width, height, 1)
           convert.drawImage(v.ctx.canvas, x, y, width, height, 0, 0, convert.canvas.width, convert.canvas.height)
-          alert(convert.canvas.width)
-          alert(convert.canvas.height)
 		  var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
           var data = b64_to_bin(data_b64)
-          var blob = new Blob([data], {type: "application/octet-stream"})
+          var blob = new Blob([data], {type: "image/png"})
           var username = prompt("Please tell us your nick name:")
           var pokename = prompt("Please tell us your pokemon's name:")
           // alert(email)
