@@ -87,7 +87,7 @@ public class RedisHelper {
         for (String key : keys) {
             res.put(key, j.get(key));
         }
-
+        j.close();
         return res;
 
 
