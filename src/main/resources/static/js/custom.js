@@ -43,7 +43,7 @@ $(document).ready(function() {
             col.appendChild(row);
             $("#owl-testimonial").appendChild(item);
         }
-    }
+    });
 
   /* Hide mobile menu after clicking on a link
     -----------------------------------------------*/
