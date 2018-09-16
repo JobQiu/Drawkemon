@@ -135,7 +135,7 @@
             create_editor({
                 name: "drawkemon",
                 // weights_url: "/models/pokemon_model_full_20.bin",
-                weights_url: "/models/pokemon_model_0.bin",
+                weights_url: "/models/pokemon_model_full_20.bin",
                 mode: "line",
                 clear: "#FFFFFF",
                 colors: {
@@ -596,7 +596,7 @@
 
                 v.frame("random_button", 347-32, 310, 64, 40, () => {
                     if (do_button(v, "random")) {
-                    this.sheet_index = this.sheet_index % 8 + 1
+                    this.sheet_index = this.sheet_index % 11 + 1
                     this.buffers = []
                     this.buffer.fillStyle = this.config.clear
                     this.buffer.fillRect(0, 0, SIZE, SIZE)
