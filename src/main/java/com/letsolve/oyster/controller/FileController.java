@@ -64,11 +64,8 @@ public class FileController {
 
         List<Painting> list = new ArrayList();
 
-
         for (String s : temp.keySet()) {
-
             list.add(new Painting(s, temp.get(s)));
-            System.out.println(s);
         }
 
         list.sort(Comparator.comparingInt(Painting::getLike));
