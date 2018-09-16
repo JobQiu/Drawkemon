@@ -76,7 +76,7 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.1&appId=522053748259954&autoLogAppEvents=1';
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=522053748259954&autoLogAppEvents=1';
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));</script>
           <!-- Your like button code -->
@@ -588,9 +588,13 @@ Editor.prototype = {
         var y = 0
         var width = 800 * SCALE - x
         var height = 310 * SCALE - y
+		  alert(width)
+		  alert(height)
         var convert = createContext(width, height, 1)
         convert.drawImage(v.ctx.canvas, x, y, width, height, 0, 0, convert.canvas.width, convert.canvas.height)
-        var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
+          alert(convert.canvas.width)
+          alert(convert.canvas.height)
+		  var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
         var data = b64_to_bin(data_b64)
         var blob = new Blob([data], {type: "application/octet-stream"})
         var url = window.URL.createObjectURL(blob)
@@ -610,13 +614,17 @@ Editor.prototype = {
           if (do_button(v, "submit")) {
           // create a canvas to hold the part of the canvas that we wish to store
           //530, 40, 256, 256
-          var x = 530
-          var y = 40
-          var width = 530 + 256
-          var height = 40 + 256
+          var x = 125 * SCALE
+          var y = 0
+          var width = 800 * SCALE - x
+          var height = 310 * SCALE - y
+		  alert(width)
+		  alert(height)
           var convert = createContext(width, height, 1)
           convert.drawImage(v.ctx.canvas, x, y, width, height, 0, 0, convert.canvas.width, convert.canvas.height)
-          var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
+          alert(convert.canvas.width)
+          alert(convert.canvas.height)
+		  var data_b64 = convert.canvas.toDataURL("image/png").replace(/^data:image\/png;base64,/, "")
           var data = b64_to_bin(data_b64)
           var blob = new Blob([data], {type: "application/octet-stream"})
           var username = prompt("Please tell us your nick name:")
@@ -1150,11 +1158,12 @@ document.addEventListener("mouseup", function(e) {
       <!--</div>-->
     </div>
   </div>
+  </div>
 </section>
 
 
 
-<!-- Javascript 
+<!-- Javascript
 ================================================== -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

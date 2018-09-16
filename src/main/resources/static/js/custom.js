@@ -28,23 +28,7 @@
     }
 
 $(document).ready(function() {
-    $.get("/gallery", function( data ) {
-        for (i = 0; i < data.length; i++){
-            var item = document.createElement("DIV");
-            item.setAttribute("class", "item")
-            var row = document.createElement("DIV");
-            row.setAttribute("class", "row")
-            var col = document.createElement("DIV");
-            col.setAttribute("class", "col-md-offset-2 col-md-8")
-            item.appendChild(row);
-            row.appendChild(col);
-            var image = document.createElement("IMG");
-            image.setAttribute("class","img-responsive");
-            image.setAttribute("src", data[i]["imageUrl"]);
-            col.appendChild(image);
-            document.getElementById("owl-testimonial").appendChild(item);
-        }
-    });
+
 
   /* Hide mobile menu after clicking on a link
     -----------------------------------------------*/
@@ -116,9 +100,28 @@ $(document).ready(function() {
   /* Owl Carousel
     -----------------------------------------------*/
   $(document).ready(function() {
+
+      $.get("/gallery", function( data ) {
+          for (i = 0; i < data.length; i++){
+              var item = document.createElement("DIV");
+              item.setAttribute("class", "item")
+              var row = document.createElement("DIV");
+              row.setAttribute("class", "row")
+              var col = document.createElement("DIV");
+              col.setAttribute("class", "col-md-offset-2 col-md-8")
+              item.appendChild(row);
+              row.appendChild(col);
+              var image = document.createElement("IMG");
+              image.setAttribute("class","img-responsive");
+              image.setAttribute("src", data[i]["imageUrl"]);
+              col.appendChild(image);
+              document.getElementById("owl-testimonial").appendChild(item);
+          }
+      });
+
     $("#owl-testimonial").owlCarousel({
       autoPlay: 8000,
-      // singleItem: true,
+      singleItem: true,
     });
   });
 
