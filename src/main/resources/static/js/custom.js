@@ -7,7 +7,7 @@
         scrollOffset: 75, //Height of Navigation Bar
         filter: ':not(.external)',
         changeHash: true
-    }); 
+    });
 
     /* Navigation visible on Scroll */
     mainNav();
@@ -40,8 +40,8 @@ $(document).ready(function() {
             row.appendChild(col);
             var image = document.createElement("IMG");
             image.setAttribute("src", data[i]["imageUrl"]);
-            col.appendChild(row);
-            $("#owl-testimonial").appendChild(item);
+            col.appendChild(image);
+            document.getElementById("owl-testimonial").appendChild(item);
         }
     });
 
