@@ -97,7 +97,7 @@
 <section id="blog" class="paralla-section" style="background: url(./images/pokemon_back.png)">
 
 <center>
-<div class = "div3" style="color: #000000; background-color:#FFFFFF;">Draw your own pokemon!!!!</div>
+<div id="eval" class = "div3" style="color: #000000; background-color:#FFFFFF;">Draw your own pokemon!!!!</div>
 <div id="drawkemon"></div>
 </center>
 <script src="deeplearn-0.3.15.js"></script>
@@ -539,14 +539,27 @@ Editor.prototype = {
                 console.timeEnd('render')
                 request_in_progress = false
                 update()
+
               })
-              
+            var r = Math.random()*7
+            var evals = new Array("Soul painter",
+            "King of the kindergarden",
+            "Very ordinary",
+            "Cartoonist killer",
+            "Kind of good :)",
+            "Ohhhh my eyes! Drive me to HOSPITAL!!!",
+            "You are good, I choose death");
+            var r_int = Math.floor(r)
+            document.getElementById("eval").innerHTML = evals[r_int];
+
             })
           }, (e) => {
             this.last_failure = e
             this.progress = null
             request_in_progress = false
             update()
+
+
           })
         }
       }
