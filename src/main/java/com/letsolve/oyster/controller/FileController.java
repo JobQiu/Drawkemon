@@ -5,6 +5,7 @@ import com.letsolve.oyster.entity.Painting;
 import com.letsolve.oyster.payload.UploadFileResponse;
 import com.letsolve.oyster.redis.RedisHelper;
 import com.letsolve.oyster.service.FileStorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 public class FileController {
 
@@ -34,7 +36,10 @@ public class FileController {
     RedisHelper redisHelper;
 
 
-
+    @GetMapping("clean")
+    public void clean() {
+        redisHelper.delByPattern("image_*");
+    }
 
 
     @GetMapping("gallery")
@@ -42,17 +47,19 @@ public class FileController {
 
         Map<String, String> temp = redisHelper.getByPattern("image_*");
 
+        log.info("loading images");
         List<Painting> list = new ArrayList();
 
         for (String s : temp.keySet()) {
-            Painting p = new Painting(s,temp.get(s));
-            if (p.getImageUrl().startsWith("http://localhost")){
+            Painting p = new Painting(s, temp.get(s));
+            if (p.getImageUrl().startsWith("http://localhost")) {
                 continue;
             }
             list.add(new Painting(s, temp.get(s)));
         }
 
-        list.sort((o1, o2) -> o2.getLike()-o1.getLike());
+        list.sort((o1, o2) -> o2.getLike() - o1.getLike());
+        log.info("loading finished ");
         return list;
     }
 

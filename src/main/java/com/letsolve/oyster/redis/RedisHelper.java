@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Component
 public class RedisHelper {
-    public static final int REDIS_CACHE_EXPIRE_TIME = 36000;
+    public static final int REDIS_CACHE_EXPIRE_TIME = 864000; // keep the image for ten days
 
     private boolean useRedis = true;
 
@@ -89,6 +89,20 @@ public class RedisHelper {
         }
         j.close();
         return res;
+
+
+    }
+
+    public boolean delByPattern(String pattern) {
+
+        Jedis j = pool.getResource();
+        Set<String> keys = j.keys(pattern);
+        for (String s : keys) {
+            j.del(s);
+
+        }
+        j.close();
+        return true;
 
 
     }
