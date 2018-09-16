@@ -5,6 +5,13 @@
 	<meta charset="utf-8">
 	<title>Drawkemon</title>
 
+  <!-- For Facebook -->
+  <meta property="og:url"           content="http://35.231.132.43:8083/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Drawkemon" />
+  <meta property="og:description"   content="This is an AI-based application that helps you design your own Pokemon. To try it out, draw your Pokemon sketch below and let the AI do the rest of the design and share your Pokemon with your friends!" />
+  <meta property="og:image"         content="http://35.231.132.43:8083/images/pokemon2.png" />
+
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
@@ -63,6 +70,17 @@
 					<!--<h4>New Community Mall</h4>-->
 					<h3>Welcome to Drawkemon!</h3>
 					<p>This is an AI-based application that helps you design your own Pokemon. To try it out, draw your Pokemon sketch below and let the AI do the rest of the design and share your Pokemon with your friends!</p>
+
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.1&appId=522053748259954&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <!-- Your like button code -->
+          <div class="fb-like" data-href="http://35.231.132.43:8083/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 				</div>
 			</div>
 
@@ -113,6 +131,7 @@ function main() {
       eraser: "#ffffff",
     },
     draw: "#000000",
+    initial_input: "/1.png",
   })
 
   window.requestAnimationFrame(frame)
@@ -310,7 +329,7 @@ function Editor(config) {
     this.sheet_loaded = true
     update()
   }
-  this.sheet_index = 0
+  this.sheet_index = 1
 }
 
 Editor.prototype = {
@@ -544,19 +563,23 @@ Editor.prototype = {
       }
     })
 
-    if (this.sheet_loaded) {
-      v.frame("random_button", 347-32, 310, 64, 40, () => {
+    v.frame("random_button", 347-32, 310, 64, 40, () => {
         if (do_button(v, "random")) {
-          // pick next sheet entry
+          this.sheet_index = this.sheet_index % 8 + 1
           this.buffers = []
-          var y_offset = this.sheet_index * SIZE
-          this.buffer.drawImage(this.sheet, 0, y_offset, SIZE, SIZE, 0, 0, SIZE, SIZE)
-          this.output.drawImage(this.sheet, SIZE, y_offset, SIZE, SIZE, 0, 0, SIZE, SIZE)
-          this.sheet_index = (this.sheet_index + 1) % (this.sheet.height / SIZE)
+          this.buffer.fillStyle = this.config.clear
+          this.buffer.fillRect(0, 0, SIZE, SIZE)
+          this.output.fillStyle = "#FFFFFF"
+          this.output.fillRect(0, 0, SIZE, SIZE)
+          var image = new Image()
+          image.src = './'+this.sheet_index +'.png'
+          //alert(image.src)
+          image.onload = () => {
+            this.buffer.drawImage(image, 0, 0)
+          }
           update()
         }
       })
-    }
 
     v.frame("save_button", 655-32, 310, 64, 40, () => {
       if (do_button(v, "save")) {
