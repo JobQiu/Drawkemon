@@ -39,6 +39,7 @@ $(document).ready(function() {
             item.appendChild(row);
             row.appendChild(col);
             var image = document.createElement("IMG");
+            image.setAttribute("class","img-responsive");
             image.setAttribute("src", data[i]["imageUrl"]);
             col.appendChild(image);
             document.getElementById("owl-testimonial").appendChild(item);
